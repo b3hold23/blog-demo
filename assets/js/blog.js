@@ -1,42 +1,45 @@
-// TODO: Create a variable that selects the main element
+const blogContainer = document.getElementById('blogContainer');
+
 let blogPosts = [];
 const apiEndpoint = './api/blog.json';
 
 async function getBlogPosts() {
-try {
-    
-    const response = await fetch(apiEndpoint);
-    if (!response.ok) {
-        throw new Error(`Failed to fetch blog posts`);
+    try {
+        const response = await fetch(apiEndpoint);
+        if (!response.ok) {
+            throw new Error (`Failed to get blog posts`);
+        }
+        const data = await response.json();
+        blogPosts = data;
+        displayBlogPosts(blogPosts);
+    } catch (error) {
+        console.log(error);
     }
-    const data = await response.json();
-    blogPosts = data;
-    displayBlogPosts(blogPosts);
-} catch (error) {
-    console.error ('fetchihng blog posts:', error);
 }
-}
-
 
 function displayBlogPosts(blogPosts) {
-    const blogContainer = document.getElementById('blogContainer');
-    blogContainer.innerHTML = '';
+    blogContainer.innerHTML = './assets/html/blog.html';
 
-    posts.forEach((post) => {
-        const blogPost = document.createElement('div');
-        blogPost.className = 'blogPost';
-        blogPost.innerHTML = `
-            <h2>${post.title}</h2>
-            <p>${post.content}</p>
-            <p>${post.author}</p>
+    blogPosts.forEach((blogPost) => {
+        const blogPostElement = document.createElement('div');
+        blogPostElement.classList.add('blog-post');
+        blogPostElement.innerHTML = `
+            <h2>${blogPost.title}</h2>
+            <blockquote>${blogPost.content}</blockquote>
+            <p>Posted by: ${blogPost.username}</p>
         `;
-        blogContainer.appendChild(blogPost);
+        blogContainer.appendChild(blogPostElement);
     });
+
+    if (blogPosts.length === 0) {
+        displayNoPostsMessage();
+    }
 }
-// TODO: Create a function that builds an element and appends it to the DOM
 
-// TODO: Create a function that handles the case where there are no blog posts to display
+function displayNoPostsMessage() {
+    const messageElement = document.createElement('p');
+    messageElement.textContent = 'No posts found.';
+    blogContainer.appendChild(messageElement);
+}
 
-// TODO: Create a function that reads from local storage and returns the data
-
-// TODO: Call the function to render the list of blog posts
+getBlogPosts();
