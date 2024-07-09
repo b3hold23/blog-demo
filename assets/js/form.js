@@ -1,6 +1,7 @@
 // TODO: Create a variable that selects the form element
 const blogForm = document.querySelector('#blogForm');
 
+if (blogForm) {
 blogForm.addEventListener('submit', function (event) {
   event.preventDefault();
 
@@ -14,11 +15,12 @@ blogForm.addEventListener('submit', function (event) {
     alert('Please complete the form');
     return;
   } 
-  saveFromData(username, title, content);
+  saveFormData(username, title, content);
   redirectPage(redirectURL);
 });
+}
 
-function saveFromData(username, title, content) {
+function saveFormData(username, title, content) {
   const formData = {
     username: username,
     title: title,

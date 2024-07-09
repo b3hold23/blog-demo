@@ -1,13 +1,13 @@
 const blogContainer = document.getElementById('blogContainer');
 
 let blogPosts = [];
-const apiEndpoint = './api/blog.json';
+const apiEndpoint = './api/blogPosts.json';
 
 async function getBlogPosts() {
     try {
         const response = await fetch(apiEndpoint);
         if (!response.ok) {
-            throw new Error (`Failed to get blog posts`);
+            throw new Error(`Failed to get blog posts`);
         }
         const data = await response.json();
         blogPosts = data;
@@ -18,7 +18,7 @@ async function getBlogPosts() {
 }
 
 function displayBlogPosts(blogPosts) {
-    blogContainer.innerHTML = './assets/html/blog.html';
+    blogContainer.innerHTML = '';
 
     blogPosts.forEach((blogPost) => {
         const blogPostElement = document.createElement('div');

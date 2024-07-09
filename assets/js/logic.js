@@ -12,7 +12,7 @@ function toggleMode() {
   }
 
   function applyModeToLocalStorage() {
-    const isDarkMode = JSON.parse(localStorage.geitem('isDarkMode'));
+    const isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
     const body = document.body;
     if (isDarkMode) {
       body.classList.add('dark');
