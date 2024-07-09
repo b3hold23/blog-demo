@@ -1,40 +1,22 @@
-# blog-demoGIVEN a personal blog
-WHEN I load the app,
+# blog-demo
+<!-- Display site here -->
 
-THEN I am presented with the landing page containing a form with labels and inputs for username, blog title, and blog content.
+This site will help you journal and blog your stories. The site will first take your username, title of the content you are going to submit and then there is a box where you can put in your content. Once the infomation is input, you can press submit and you will be loaded to another page. In this page all of your information will be displayed. 
 
-WHEN I try to submit a form without a username, title, or content,
+# Description 
 
-THEN I am presented with a message that prompts me to complete the form.
+The code to this site is not fullly complete. I have found my self with a CORS error that I will need to fix. Once that information is corrected the site will function correctly. 
 
-WHEN I submit the form,
-THEN blog post data is stored to localStorage.
+The information you can see now are the following:
 
-WHEN the form submits,
+Form page where you can submit your information.
+<img src="./images/form-page.JPG">
 
-THEN I am redirected to the posts page.
 
-WHEN I view the posts page,
+This is the blog page. Here is where the informaton should be displayed that was input in the form. 
+<img src="./images/blog-page.JPG">
 
-THEN I am presented with a header, with a light mode/dark mode toggle, and a "Back" button.
 
-WHEN I click the light mode/dark mode toggle,
+The site also has the availablity to go into dark mode as well. 
+<img src="./images/dark-form.JPG">
 
-THEN the page content's styles update to reflect the selection.
-
-WHEN I click the "Back" button,
-
-THEN I am redirected back to the landing 
-page where I can input more blog entries.
-
-WHEN I view the main content,
-
-THEN I am presented with a list of blog posts that are pulled from localStorage.
-
-WHEN I view localStorage,
-
-THEN I am presented with a JSON array of blog post objects, each including the post author's username, title of the post, and post's content.
-
-WHEN I take a closer look at a single blog entry in the list,
-
-THEN I can see the title, the content, and the author of the post.
