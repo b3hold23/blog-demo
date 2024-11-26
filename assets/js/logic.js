@@ -1,28 +1,65 @@
-// TODO: Create logic to toggle the light/dark mode styles for the page and circle. The mode should be saved to local storage.
-function toggleMode() {
-    const body = document.body;
-    body.classList.toggle('dark');
+const toggleButton = document.querySelector('.toggle-button');
 
-    const isDarkMode = body.classList.contains('dark');
-    saveModeToLocalStorage(isDarkMode);
+let redirectURL = '';
+
+const redirectPage = () => {
+  redirectURL = url;
+  location.assign(url);
+};
+
+const toggleTheme = () => {
+  let theme, moonColor;
+
+  if (mode === 'light') {
+    theme = '☀️';
+    moonColor = '#ffb100';
+  } else {
+    theme = '🌒';
+    moonColor = '#8570a5';
   }
 
-  function saveModeToLocalStorage(isDarkMode) {
-    localStorage.setItem('isDarkMode', isDarkMode);
+  toggleButton.textContent = theme;
+
+  document.body.classlist = mode;
+
+  document.documentElement.style.setProperty('--moon-color', moonColor);
+};
+
+const toggleMode = () => {
+  const mode = themeMode();
+
+  let newMode;
+  if (mode === 'light') {
+    newMode = 'dark';
+  } else {
+    newMode = 'light';
   }
 
-  function applyModeToLocalStorage() {
-    const isDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
-    const body = document.body;
-    if (isDarkMode) {
-      body.classList.add('dark');
-    } else {
-      body.classList.remove('dark');
-    }
-  }
+  applyMode(newMode);
 
-  document.addEventListener(`DOMContentLoaded`, function(){
-    applyModeToLocalStorage();
-  });
+  saveMode(newMode);
+};
 
-// TODO: Create functions to read and write from local storage
+const getMode = () => {
+  const mode = localStorage.getItem('mode') || 'dark';
+
+  return mode;
+};
+
+const saveTheme = (mode) => {
+  localStorage.setItem('mode', mode);
+};
+
+const storeLocalStorage = (data) {
+  const allBlogs = readLocalStorage();
+
+  allBlogs.push(data);
+
+  const stringData = JSON.stringify(allBlogs);
+
+  localStorage.setItem('blogs', stringData);
+};
+
+applyMode(getMode());
+
+toggleButton.addEventListener('click', toggleMode);
